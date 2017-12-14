@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Movies Finder</title>
+
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<script type="text/javascript">
+function init() {
+	navigator.geolocation.getCurrentPosition(
+			(p) => {
+				document.getElementById("lat").value = p.coords.latitude 
+				document.getElementById("lng").value = p.coords.longitude
+			}, 
+			(err) => {console.log(" ee ",err)}, 
+			{
+		   		enableHighAccuracy : true,
+		   		timeout : 60000,
+		   		maximumAge : 0
+		    })
+}
+</script>
+<body onload="init();">
+	<div th:replace="fragments/header :: header"/>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12" style="text-align: center;">
+				<h1> Filmes em alta </h1>
+			</div>
+		</div>
+	</div>
+	
+	<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

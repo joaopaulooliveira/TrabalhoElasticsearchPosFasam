@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Movies Finder</title>
+
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<script type="text/javascript">
+function init() {
+	navigator.geolocation.getCurrentPosition(
+			(p) => {
+				document.getElementById("lat").value = p.coords.latitude 
+				document.getElementById("lng").value = p.coords.longitude
+			}, 
+			(err) => {console.log(" ee ",err)}, 
+			{
+		   		enableHighAccuracy : true,
+		   		timeout : 60000,
+		   		maximumAge : 0
+		    })
+}
+</script>
+<body onload="init();">
+	<div th:replace="fragments/header :: header"/>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12" style="text-align: center;">
+				<h1> Filmes em alta </h1>
+			</div>
+		</div>
+		<table class="table">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">Title</th>
+					<th scope="col" style="text-align: right">Popularity</th>
+					<th scope="col" style="text-align: center">Since</th>
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="filme : ${filmes}">
+					<tr>
+						<td th:text="${filme.title}"></td>
+						<td th:text="${#numbers.formatDecimal(filme.popularity, 0, 'COMMA', 2, 'POINT')}" style="text-align: right"></td>
+						<td th:text="${#dates.format(filme.releaseDate, 'dd/MM/yyyy')}" style="text-align: center"></td>
+					</tr>
+				</th:block>
+			</tbody>
+		</table>
+	</div>
+	
+	<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

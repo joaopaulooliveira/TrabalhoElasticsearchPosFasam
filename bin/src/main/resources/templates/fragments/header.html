@@ -1,0 +1,65 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:fragment="header-css">
+        <!-- this is header-css -->
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+		<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+		
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+		rel="stylesheet"/>
+		<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}"
+		rel="stylesheet"/>
+
+        <link rel="stylesheet" th:href="@{/css/main.css}" />
+    </div>
+</head>
+
+<body th:attr="onload=init()" >
+<div th:fragment="header">
+    <!-- this is header -->
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/}">Movies Finder</a>
+            </div>
+            <div style="clear:both"></div>
+            <div id="navbar" class="collapse navbar-collapse filtros">
+            		<form action="/consulta" method="GET">
+	                <div class="row">
+	                		<div class="col-sm-2">
+	                			Titulo:
+	                		</div>
+	                		<div class="col-sm-6">
+	                			<input id="titulo" name="titulo"></input>
+	                		</div>
+	                </div>
+	                <div class="row">
+	                		<div class="col-sm-2">
+	                			Desc:
+	                		</div>
+	                		<div	 class="col-sm-6">
+	                			<input name="desc"></input>
+	                		</div>
+	                </div>
+	                <div class="row">
+	                		<div class="col-sm-2">
+	                			Desde de:
+	                		</div>
+	                		<div class="col-sm-6">
+	                			<input name="ano"></input>
+	                		</div>
+	                </div>
+	                
+	                <div class="row">
+	                		<input type="hidden" id="lat" name="lat"></input>
+	                		<input type="hidden" id="lng" name="lng"></input>
+	                		<button type="submit" class="btn btn-success">Buscar</button>
+	                </div>
+				</form>
+            </div>
+        </div>
+    </nav>
+</div>
+
+</body>
+</html>
